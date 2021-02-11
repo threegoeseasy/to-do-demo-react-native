@@ -9,7 +9,8 @@ export default function App() {
   const [todos, setTodos] = useState([
     {id: '1', title: 'Do a test task', done: true}
   ]);
-  const [showAlert, setShowAlert] = useState(true)
+  const [showAlert, setShowAlert] = useState(true);
+  const [showWelcomeAlert, setShowWelcomeAlert] = useState(true);
 
   const deleteTodo = (id) => {
     setTodos(prevState => prevState.filter(todo => todo.id !== id));
@@ -36,16 +37,20 @@ export default function App() {
     setTodos(prev => [...prev, todo]);
   }
 
-  Alert.alert(
-    'Welcome!',
-    '1. Press "+" or "return" to add new to-do\n 2. Tap and hold to-do to delete',
-    [
-      {
-        text: 'Got it!',
-        style: 'cancel'
-      },
-    ],
-  );
+  if (showWelcomeAlert) {
+    Alert.alert(
+      'Welcome!',
+      '1. Press "+" or "return" to add new to-do\n 2. Tap and hold to-do to delete',
+      [
+        {
+          text: 'Got it!',
+          style: 'cancel'
+        },
+      ],
+    );
+    setShowWelcomeAlert(false);
+  }
+
 
   return (
     <View style={{flex: 1}}>
