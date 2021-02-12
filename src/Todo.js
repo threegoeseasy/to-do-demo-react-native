@@ -4,8 +4,6 @@ import {CheckBox} from 'react-native-elements';
 
 export const Todo = (props) => {
 
-
-
   const longPressHandler = () => {
     props.showAlert
     ? Alert.alert(
@@ -23,7 +21,7 @@ export const Todo = (props) => {
         },
         {
           text: 'Do not show again',
-          onPress: () => props.setShowAlert(false),
+          onPress: () => props.setShowAlert(),
           style: 'default'
         },
       ]
@@ -39,11 +37,9 @@ export const Todo = (props) => {
       <View style={styles.todo}>
         <CheckBox
           checked={props.todo.done}
-          onPress={props.onCheck}
+          onPress={() => props.onCheck(props.todo.id)}
         />
-
         <Text style={styles.text}>{props.todo.title}</Text>
-
       </View>
     </TouchableOpacity>
   );
@@ -54,7 +50,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: 10,
+    marginRight: 0,
+    flexGrow: 1,
+    width: '85%',
+    padding: 5
   },
   text: {
     fontSize: 24,
